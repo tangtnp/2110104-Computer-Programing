@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int R, C;
+    cin >> R >> C;
+
+    // Use vectors for dynamic memory allocation
+    vector<double> a(R * C);
+    vector<double> b((R - 2) * (C - 2));
+
+    for (int i = 0; i < R * C; i++)
+        cin >> a[i];
+
+    for (int j = 0; j < (R - 2); j++) {
+        for (int k = 0; k < (C - 2); k++) {
+            double x = (a[j * C + k] + a[j * C + k + 1] + a[j * C + k + 2] +
+                        a[(j + 1) * C + k] + a[(j + 1) * C + k + 1] + a[(j + 1) * C + k + 2] +
+                        a[(j + 2) * C + k] + a[(j + 2) * C + k + 1] + a[(j + 2) * C + k + 2]) / 9;
+            b[j * (C - 2) + k] = round(x * 100) / 100.0;
+        }
+    
+
+    for (int j = 0; j < R - 2; j++) {
+        for (int k = 0; k < C - 2; k++) {
+            cout << b[j * (C - 2) + k] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+}
